@@ -12,6 +12,7 @@
     </style>
 </head>
 <body>
+    <?php error_reporting(0); ?>
     <h1>Busqueda de herramientas</h1>
     <!-- tabla inicial donde podra elegir las categorias de la herramientas-->
     <table>
@@ -27,6 +28,7 @@
                 <td>
                     <form method="POST">
                         <select name="select">
+                            <option value="" selected disabled>Seleccione una categoria</option>
                             <!-- realiza los options de todas las categorias de herramientas de la base de datos -->
                             <?php 
                             include("funciones.php");

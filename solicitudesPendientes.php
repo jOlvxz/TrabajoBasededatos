@@ -75,13 +75,18 @@
                     }
                 }
                 $rs = mysqli_query($cnn,$query);
-                while ($row = mysqli_fetch_array($rs)){
-                    echo "<tr>";
-                    echo "<td>$row[0]</td>";
-                    echo "<td>$row[1]</td>";
-                    echo "<td>$row[2]</td>";
-                    echo "<td>$row[3]</td>";
-                    echo "</tr>";
+                #Comprobacion si no existen datos con los filtros
+                if(mysqli_num_rows($rs) == "0"){
+                    echo "<script>alert('Comprobacion de ')</script>";
+                }else{
+                    while ($row = mysqli_fetch_array($rs)){
+                        echo "<tr>";
+                        echo "<td>$row[0]</td>";
+                        echo "<td>$row[1]</td>";
+                        echo "<td>$row[2]</td>";
+                        echo "<td>$row[3]</td>";
+                        echo "</tr>";
+                    }
                 }
             ?>
         </tbody>
