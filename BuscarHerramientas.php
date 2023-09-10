@@ -63,25 +63,28 @@
         <tbody>
             <?php 
             if(isset($_POST['buscar'])){
-            $idCategoria = $_POST['select'];
-            $query = "SELECT h.id,h.descripcion,u.almacen,u.estante,u.altura,u.pasillo
-            FROM ubicacion u, herramienta h, categoria c
-            WHERE (h.idubicacion = u.id) and (c.id = h.idcategoria) and
-            (h.disponibilidad = 'Disponible') and (u.almacen = 'Pañol 1') and
-            (c.id = '$idCategoria')";
-            $rs = mysqli_query($cnn, $query);
-            while($row = mysqli_fetch_array($rs)){
-                echo "<tr>";
-                echo "<td>$row[0]</td>";
-                echo "<td>$row[1]</td>";
-                echo "<td>$row[2]</td>";
-                echo "<td>$row[3]</td>";
-                echo "<td>$row[4]</td>";
-                echo "<td>$row[5]</td>";
-                echo "</tr>";
-            }
-
-
+                $idCategoria = $_POST['select'];
+                $query = "SELECT h.id,h.descripcion,u.almacen,u.estante,u.altura,u.pasillo
+                FROM ubicacion u, herramienta h, categoria c
+                WHERE (h.idubicacion = u.id) and (c.id = h.idcategoria) and
+                (h.disponibilidad = 'Disponible') and (u.almacen = 'Pañol 1') and
+                (c.id = '$idCategoria')";
+                $rs = mysqli_query($cnn, $query);
+                # Realiza la comprobacion de que si existen resultados para mostrar
+                if(mysqli_num_rows($rs) == "0"){
+                    echo "<script>alert('No hay herramientas de esa categoria con una ubicación asignada')</script>";
+                }else{
+                    while($row = mysqli_fetch_array($rs)){
+                        echo "<tr>";
+                        echo "<td>$row[0]</td>";
+                        echo "<td>$row[1]</td>";
+                        echo "<td>$row[2]</td>";
+                        echo "<td>$row[3]</td>";
+                        echo "<td>$row[4]</td>";
+                        echo "<td>$row[5]</td>";
+                        echo "</tr>";
+                    }
+                }
             }
 
             ?>
